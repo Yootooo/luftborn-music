@@ -2,4 +2,5 @@
   <Project Path="LuftbornMusic.API/LuftbornMusic.API.csproj" />
   <Project Path="LuftbornMusic.Core/LuftbornMusic.Core.csproj" />
   <Project Path="LuftbornMusic.Infrastructure/LuftbornMusic.Infrastructure.csproj" />
+  <Project Path="LuftbornMusic.Tests/LuftbornMusic.Tests.csproj" />
 </Solution>
