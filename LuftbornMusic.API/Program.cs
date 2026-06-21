@@ -6,11 +6,12 @@ using LuftbornMusic.Infrastructure.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // --- TEMPORARY IN-MEMORY SETUP ---
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseInMemoryDatabase("LuftbornMusicTestDb"));
-
 // builder.Services.AddDbContext<AppDbContext>(options =>
-//     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+//     options.UseInMemoryDatabase("LuftbornMusicTestDb"));
+
+// the next 2 lines will be commented for in memory database 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
 
@@ -20,11 +21,12 @@ builder.Services.AddSwaggerGen(); // This gives us a beautiful UI to test our AP
 
 var app = builder.Build();
 
-// using (var scope = app.Services.CreateScope())
-// {
-//     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-//     dbContext.Database.Migrate(); 
-// }
+// and those liens too 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate(); 
+}
 
 app.UseSwagger();
 app.UseSwaggerUI();
